@@ -1,0 +1,1 @@
+my first flutter app, a simple quiz app i made to get started with learning the flutter framework 
