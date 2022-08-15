@@ -32,6 +32,7 @@ class _QuizAppState extends State<QuizApp> {
       home: Scaffold(
         appBar: AppBar(
           title: Text("Appbar title"),
+          backgroundColor: Color(0xff097969),
         ),
         body: Column(children: [
           Question(questions[_questionIndex]),
