@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/quiz.dart';
 
 import './question.dart';
 import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(QuizApp());
 
@@ -14,7 +17,7 @@ class QuizApp extends StatefulWidget {
 
 class _QuizAppState extends State<QuizApp> {
   int _questionIndex = 0;
-  static const questionsAndAnswers = [
+  static const _questionsAndAnswers = [
     {
       'question': "What's your favourite drink",
       'answers': ["beer", "coffee", "water"],
@@ -43,19 +46,9 @@ class _QuizAppState extends State<QuizApp> {
           title: Text("Appbar title"),
           backgroundColor: Color(0xff097969),
         ),
-        body: _questionIndex < questionsAndAnswers.length
-            ? Column(children: [
-                Question(
-                    questionsAndAnswers[_questionIndex]["question"] as String),
-                ...(questionsAndAnswers[_questionIndex]["answers"]
-                        as List<String>)
-                    .map((answer) {
-                  return Answer(_answerQuestion, answer);
-                }).toList(),
-              ])
-            : Center(
-                child: Text("lessgooo!"),
-              ),
+        body: _questionIndex < _questionsAndAnswers.length
+            ? Quiz(_questionsAndAnswers, _answerQuestion, _questionIndex)
+            : Result(),
       ),
     );
   }
