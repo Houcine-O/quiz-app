@@ -14,7 +14,7 @@ class QuizApp extends StatefulWidget {
 
 class _QuizAppState extends State<QuizApp> {
   int _questionIndex = 0;
-  var questionsAndAnswers = [
+  static const questionsAndAnswers = [
     {
       'question': "What's your favourite drink",
       'answers': ["beer", "coffee", "water"],
@@ -31,7 +31,7 @@ class _QuizAppState extends State<QuizApp> {
 
   void _answerQuestion() {
     setState(() {
-      _questionIndex = (_questionIndex + 1) % 3;
+      _questionIndex = _questionIndex + 1;
     });
   }
 
@@ -43,13 +43,19 @@ class _QuizAppState extends State<QuizApp> {
           title: Text("Appbar title"),
           backgroundColor: Color(0xff097969),
         ),
-        body: Column(children: [
-          Question(questionsAndAnswers[_questionIndex]["question"] as String),
-          ...(questionsAndAnswers[_questionIndex]["answers"] as List<String>)
-              .map((answer) {
-            return Answer(_answerQuestion, answer);
-          }).toList(),
-        ]),
+        body: _questionIndex < questionsAndAnswers.length
+            ? Column(children: [
+                Question(
+                    questionsAndAnswers[_questionIndex]["question"] as String),
+                ...(questionsAndAnswers[_questionIndex]["answers"]
+                        as List<String>)
+                    .map((answer) {
+                  return Answer(_answerQuestion, answer);
+                }).toList(),
+              ])
+            : Center(
+                child: Text("lessgooo!"),
+              ),
       ),
     );
   }
