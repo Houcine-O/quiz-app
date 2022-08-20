@@ -109,6 +109,13 @@ class _QuizAppState extends State<QuizApp> {
     }
   ];
 
+  void _resetQuiz() {
+    setState(() {
+      _totalScore = 0;
+      _questionIndex = 0;
+    });
+  }
+
   void _answerQuestion(int score) {
     _totalScore += score;
     setState(() {
@@ -126,7 +133,7 @@ class _QuizAppState extends State<QuizApp> {
         ),
         body: _questionIndex < _questionsAndAnswers.length
             ? Quiz(_questionsAndAnswers, _answerQuestion, _questionIndex)
-            : Result(_totalScore),
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
